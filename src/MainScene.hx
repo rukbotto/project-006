@@ -1,37 +1,58 @@
 import com.haxepunk.HXP;
 import com.haxepunk.Scene;
 import com.haxepunk.graphics.Text;
+import com.haxepunk.utils.Input;
+import com.haxepunk.utils.Key;
 
 import TribeMember;
 
 class MainScene extends Scene
 {
-    private var tribe:Array<TribeMember> = new Array<TribeMember>();
-
     public override function begin()
     {
         createTribe();
     }
 
-    private function createTribe()
+    public override function update()
     {
-        tribe.push(new TribeMember(HXP.halfWidth, HXP.halfHeight,
-            TribeMember.WOMAN));
+        super.update();
 
-        tribe.push(new TribeMember(HXP.halfWidth - 30, HXP.halfHeight - 30,
-            TribeMember.WOMAN));
+        if (Input.mousePressed)
+        {
+            var tribeMember = collidePoint(TribeMember.TYPE, Input.mouseX,
+                Input.mouseY);
 
-        tribe.push(new TribeMember(HXP.halfWidth + 30, HXP.halfHeight - 30,
-            TribeMember.WOMAN));
+            if (tribeMember != null)
+                cast(tribeMember, TribeMember).selected = true;
+        }
 
-        tribe.push(new TribeMember(HXP.halfWidth - 30, HXP.halfHeight + 30,
-            TribeMember.MAN));
-
-        tribe.push(new TribeMember(HXP.halfWidth + 30, HXP.halfHeight + 30,
-            TribeMember.MAN));
-
-        for (i in 0...tribe.length)
-            add(tribe[i]);
+        if (Input.check(Key.ESCAPE))
+        {
+            for (i in 0..._tribe.length)
+                _tribe[i].selected = false;
+        }
     }
 
+    private function createTribe()
+    {
+        _tribe.push(new TribeMember(HXP.halfWidth, HXP.halfHeight,
+            TribeMember.WOMAN));
+
+        _tribe.push(new TribeMember(HXP.halfWidth - 30, HXP.halfHeight - 30,
+            TribeMember.WOMAN));
+
+        _tribe.push(new TribeMember(HXP.halfWidth + 30, HXP.halfHeight - 30,
+            TribeMember.WOMAN));
+
+        _tribe.push(new TribeMember(HXP.halfWidth - 30, HXP.halfHeight + 30,
+            TribeMember.MAN));
+
+        _tribe.push(new TribeMember(HXP.halfWidth + 30, HXP.halfHeight + 30,
+            TribeMember.MAN));
+
+        for (i in 0..._tribe.length)
+            add(_tribe[i]);
+    }
+
+    private var _tribe:Array<TribeMember> = new Array<TribeMember>();
 }
