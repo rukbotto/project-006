@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<TextureAtlas imagePath="grafics/assets.png" width="96" height="32">
-    <sprite n="water.png" x="0" y="0" w="32" h="32"/>
-    <sprite n="tree.png" x="33" y="0" w="32" h="32"/>
-    <sprite n="plant.png" x="65" y="0" w="32" h="32"/>
-    <sprite n="half_plant.png" x="65" y="33" w="32" h="32"/>
-    <sprite n="dirt.png" x="97" y="0" w="32" h="32"/>
-</TextureAtlas>

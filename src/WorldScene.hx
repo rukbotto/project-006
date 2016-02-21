@@ -10,13 +10,16 @@ import Resource;
 
 class WorldScene extends Scene
 {
+    public static inline var TILE_WIDTH = 32;
+    public static inline var TILE_HEIGHT = 32;
     public var tilemap:Tilemap;
 
     public function new()
     {
         super();
         _worldResources = new Array<Array<Resource>>();
-        _resourceType = [0,1,2,3,6]; //0 = water, 1 = tree, 2 = plant, 3 = dirt, 6 = half plant
+        //0 = water, 1 = tree, 2 = plant, 3 = dirt, 6 = half plant
+        _resourceType = [0,1,2,3,6]; 
     }
 
     public override function begin()
@@ -27,14 +30,17 @@ class WorldScene extends Scene
             for (j in 0...100)
             {   
                 var type = _resourceType[Std.random(_resourceType.length)];
-                var type = new Resource(i, j, _resourceType[Std.random(_resourceType.length)]);
+                var type = new Resource(i, j, _resourceType[
+                                        Std.random(_resourceType.length)]);
                 row.push(type);
             }
             _worldResources.push(row);
         }
 
-        tilemap = new Tilemap("graphics/sprite_sheet.png", _worldResources[0].length * _TILE_WIDTH,
-                                          _worldResources.length * _TILE_HEIGHT, _TILE_WIDTH, _TILE_HEIGHT);
+        tilemap = new Tilemap("graphics/sprite_sheet.png", 
+                              _worldResources[0].length * TILE_WIDTH,
+                              _worldResources.length * TILE_HEIGHT, TILE_WIDTH,
+                              TILE_HEIGHT);
 
         for (i in 0..._worldResources.length)
         {
@@ -96,12 +102,11 @@ class WorldScene extends Scene
 
     public function getTileByPosition(x:Int, y:Int):Resource
     {
-        return _worldResources[Math.round(x/_TILE_WIDTH)-1][Math.round(y/_TILE_HEIGHT)-1];
+        return _worldResources[Math.round(x/TILE_WIDTH)-1][
+                               Math.round(y/TILE_HEIGHT)-1];
     }
 
     private var _worldResources:Array<Array<Resource>>;
     private var _resourceType:Array<Int>;
     private var _tribe:Array<TribeMember> = new Array<TribeMember>();
-    private static inline var _TILE_WIDTH = 32;
-    private static inline var _TILE_HEIGHT = 32;
 }
