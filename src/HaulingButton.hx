@@ -1,5 +1,6 @@
 import com.haxepunk.Entity;
 import com.haxepunk.graphics.Image;
+import com.haxepunk.utils.Input;
 
 
 class HaulingButton extends Entity
@@ -22,11 +23,23 @@ class HaulingButton extends Entity
 
     public override function update()
     {
+        if (Input.mousePressed)
+        {
+            if (collidePoint(x, y, Input.mouseX, Input.mouseY))
+                hauling();
+        }
+
         x = _tribeMember.x + _tribeMember.halfWidth + 5 + halfWidth;
         y = _tribeMember.y - _tribeMember.halfHeight + halfHeight;
 
         graphic.x = -halfWidth;
         graphic.y = -halfHeight;
+    }
+
+    private function hauling()
+    {
+        trace("Hauling...");
+        _tribeMember.linearMotion.active = false;
     }
 
     private var _tribeMember:TribeMember;

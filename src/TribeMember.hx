@@ -17,6 +17,9 @@ class TribeMember extends Entity
 
     public static inline var TYPE = "tribeMember";
 
+    public var linearMotion(get, null):LinearMotion;
+    private function get_linearMotion():LinearMotion { return _linearMotion; }
+
     public var selected(get, set):Bool;
     private function get_selected():Bool { return _selected; }
     private function set_selected(value:Bool):Bool
