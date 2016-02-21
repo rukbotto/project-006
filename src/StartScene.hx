@@ -9,12 +9,12 @@ import WorldScene;
 
 class StartScene extends Scene
 {
-	private var title:Entity;
-	private var description:Entity;
+    private var title:Entity;
+    private var description:Entity;
 
     public override function begin()
     {
-    	var textOptions = {size: 50, align: TextFormatAlign.CENTER};
+        var textOptions = {size: 50, align: TextFormatAlign.CENTER};
         var text = new Text("Project_006", 0, 0, 640, 0, textOptions);
         title = addGraphic(text, 0, 0, 50);
 
@@ -25,8 +25,8 @@ class StartScene extends Scene
 
     public override function update()
     {
-    	if (Input.check(Key.SPACE)) {
-    		HXP.scene = new WorldScene();
-    	}
+        if (Input.check(Key.SPACE)) {
+            HXP.scene = new WorldScene();
+        }
     }
 }
