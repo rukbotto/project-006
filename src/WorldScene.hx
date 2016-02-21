@@ -3,42 +3,41 @@ import com.haxepunk.Entity;
 import com.haxepunk.HXP;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.Tilemap;
-import GameData;
 
 
 class WorldScene extends Scene
 {
-    private var TYPES = ['w','t'];
+    private var _worldResources:Array<Array<Int>>;
+    private var _resourceType:Array<Int>;
 
     public function new()
     {
         super();
+        _worldResources = new Array<Array<Int>>();
+        _resourceType = [0,1,2];
     }
 
     public override function begin()
     {
-        var map:Array<Array<String>> = new Array<Array<String>>();
         for (i in 0...100)
         {
-            var row = new Array<String>();
+            var row = new Array<Int>();
             for (j in 0...100)
             {   
-                var type = GameData.getInstance().resourceType[Std.random(GameData.getInstance().resourceType.length)];
+                var type = Std.random(_resourceType.length);
                 row.push(type);
             }
-            map.push(row);
+            _worldResources.push(row);
         }
-        GameData.getInstance().worldResources = map;
-        var gameData:GameData = GameData.getInstance();
 
-        var tilemap:Tilemap = new Tilemap("graphics/sprite_sheet.png", gameData.worldResources[0].length * 32,
-                                          gameData.worldResources.length * 32, 32, 32);
+        var tilemap:Tilemap = new Tilemap("graphics/sprite_sheet.png", _worldResources[0].length * 32,
+                                          _worldResources.length * 32, 32, 32);
 
-        for (i in 0...gameData.worldResources.length)
+        for (i in 0..._worldResources.length)
         {
-            for (j in 0...gameData.worldResources[0].length)
+            for (j in 0..._worldResources[0].length)
             {
-                tilemap.setTile(i, j, gameData.getResourceTypeTileIndex(gameData.worldResources[i][j]));
+                tilemap.setTile(i, j, _worldResources[i][j]);
             }
         }
 
