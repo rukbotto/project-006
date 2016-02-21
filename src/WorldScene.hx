@@ -5,41 +5,42 @@ import com.haxepunk.graphics.Image;
 import com.haxepunk.graphics.Tilemap;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
+import Resource;
 
 
 class WorldScene extends Scene
 {
-    private var _worldResources:Array<Array<Int>>;
-    private var _resourceType:Array<Int>;
+    public var tilemap:Tilemap;
 
     public function new()
     {
         super();
-        _worldResources = new Array<Array<Int>>();
-        _resourceType = [0,1,2];
+        _worldResources = new Array<Array<Resource>>();
+        _resourceType = [0,1,2,3,6]; //0 = water, 1 = tree, 2 = plant, 3 = dirt, 6 = half plant
     }
 
     public override function begin()
     {
         for (i in 0...100)
         {
-            var row = new Array<Int>();
+            var row = new Array<Resource>();
             for (j in 0...100)
             {   
-                var type = Std.random(_resourceType.length);
+                var type = _resourceType[Std.random(_resourceType.length)];
+                var type = new Resource(i, j, _resourceType[Std.random(_resourceType.length)]);
                 row.push(type);
             }
             _worldResources.push(row);
         }
 
-        var tilemap:Tilemap = new Tilemap("graphics/sprite_sheet.png", _worldResources[0].length * 32,
-                                          _worldResources.length * 32, 32, 32);
+        tilemap = new Tilemap("graphics/sprite_sheet.png", _worldResources[0].length * _TILE_WIDTH,
+                                          _worldResources.length * _TILE_HEIGHT, _TILE_WIDTH, _TILE_HEIGHT);
 
         for (i in 0..._worldResources.length)
         {
             for (j in 0..._worldResources[0].length)
             {
-                tilemap.setTile(i, j, _worldResources[i][j]);
+                tilemap.setTile(i, j, _worldResources[i][j].type);
             }
         }
 
@@ -93,5 +94,14 @@ class WorldScene extends Scene
             add(_tribe[i]);
     }
 
+    public function getTileByPosition(x:Int, y:Int):Resource
+    {
+        return _worldResources[Math.round(x/_TILE_WIDTH)-1][Math.round(y/_TILE_HEIGHT)-1];
+    }
+
+    private var _worldResources:Array<Array<Resource>>;
+    private var _resourceType:Array<Int>;
     private var _tribe:Array<TribeMember> = new Array<TribeMember>();
+    private static inline var _TILE_WIDTH = 32;
+    private static inline var _TILE_HEIGHT = 32;
 }

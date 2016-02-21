@@ -1,6 +1,7 @@
 import com.haxepunk.Entity;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.utils.Input;
+import WorldScene;
 
 
 class EatingButton extends Entity
@@ -37,8 +38,15 @@ class EatingButton extends Entity
     }
 
     private function eating()
-    {
-        trace("Eating...");
+    {   
+        var worldScene = cast(scene, WorldScene);
+        var resource = worldScene.getTileByPosition(Std.int(_tribeMember.x +
+                       _tribeMember.halfWidth), Std.int(_tribeMember.y + _tribeMember.halfHeight));
+        if (resource.type == 2 || resource.type == 6)
+        {
+            worldScene.tilemap.setTile(resource.x, resource.y, if (resource.type == 2) 6 else 3);
+            resource.type = if (resource.type == 2) 6 else 3;
+        }
         _tribeMember.linearMotion.active = false;
     }
 
