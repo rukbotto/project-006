@@ -6,6 +6,7 @@ import com.haxepunk.utils.Key;
 
 import TribeMember;
 
+
 class MainScene extends Scene
 {
     public override function begin()
@@ -23,7 +24,9 @@ class MainScene extends Scene
                 Input.mouseY);
 
             if (tribeMember != null)
+            {
                 cast(tribeMember, TribeMember).selected = true;
+            }
         }
 
         if (Input.check(Key.ESCAPE))

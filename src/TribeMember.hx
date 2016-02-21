@@ -1,7 +1,11 @@
 import com.haxepunk.Entity;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.utils.Input;
+import com.haxepunk.utils.Key;
 import com.haxepunk.tweens.motion.LinearMotion;
+
+import HaulingButton;
+
 
 class TribeMember extends Entity
 {
@@ -35,9 +39,12 @@ class TribeMember extends Entity
         addTween(_linearMotion);
 
         _selected = false;
+        _toggleMenu = false;
 
         _gender = gender;
         _speed = 100;
+
+        _haulingButton = new HaulingButton(this);
     }
 
     public override function update()
@@ -49,6 +56,26 @@ class TribeMember extends Entity
                 _linearMotion.setMotionSpeed(x, y, Input.mouseX, Input.mouseY,
                     _speed);
                 _selected = false;
+
+                scene.remove(_haulingButton);
+                _toggleMenu = false;
+            }
+        }
+
+        if (Input.pressed(Key.M))
+        {
+            if (_selected)
+            {
+                if (!_toggleMenu)
+                {
+                    scene.add(_haulingButton);
+                    _toggleMenu = true;
+                }
+                else
+                {
+                    scene.remove(_haulingButton);
+                    _toggleMenu = false;
+                }
             }
         }
 
@@ -79,7 +106,10 @@ class TribeMember extends Entity
 
     private var _linearMotion:LinearMotion;
     private var _selected:Bool;
+    private var _toggleMenu:Bool;
 
     private var _gender:String;
     private var _speed:Float;
+
+    private var _haulingButton:HaulingButton;
 }
