@@ -4,7 +4,7 @@ import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
 import com.haxepunk.tweens.motion.LinearMotion;
 
-import HaulingButton;
+import EatingButton;
 
 
 class TribeMember extends Entity
@@ -47,7 +47,7 @@ class TribeMember extends Entity
         _gender = gender;
         _speed = 100;
 
-        _haulingButton = new HaulingButton(this);
+        _eatingButton = new EatingButton(this);
     }
 
     public override function update()
@@ -60,7 +60,7 @@ class TribeMember extends Entity
                     _speed);
                 _selected = false;
 
-                scene.remove(_haulingButton);
+                scene.remove(_eatingButton);
                 _toggleMenu = false;
             }
         }
@@ -71,12 +71,12 @@ class TribeMember extends Entity
             {
                 if (!_toggleMenu)
                 {
-                    scene.add(_haulingButton);
+                    scene.add(_eatingButton);
                     _toggleMenu = true;
                 }
                 else
                 {
-                    scene.remove(_haulingButton);
+                    scene.remove(_eatingButton);
                     _toggleMenu = false;
                 }
             }
@@ -114,5 +114,5 @@ class TribeMember extends Entity
     private var _gender:String;
     private var _speed:Float;
 
-    private var _haulingButton:HaulingButton;
+    private var _eatingButton:EatingButton;
 }

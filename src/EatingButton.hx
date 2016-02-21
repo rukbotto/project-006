@@ -3,7 +3,7 @@ import com.haxepunk.graphics.Image;
 import com.haxepunk.utils.Input;
 
 
-class HaulingButton extends Entity
+class EatingButton extends Entity
 {
     public static inline var HEIGHT = 16;
     public static inline var WIDTH = 16;
@@ -12,12 +12,12 @@ class HaulingButton extends Entity
     {
         super(0, 0);
 
-        graphic = Image.createRect(HaulingButton.WIDTH, HaulingButton.HEIGHT,
+        graphic = Image.createRect(EatingButton.WIDTH, EatingButton.HEIGHT,
             0xFF0000);
 
         _tribeMember = tribeMember;
 
-        setHitbox(HaulingButton.WIDTH, HaulingButton.HEIGHT);
+        setHitbox(EatingButton.WIDTH, EatingButton.HEIGHT);
         centerOrigin();
     }
 
@@ -26,7 +26,7 @@ class HaulingButton extends Entity
         if (Input.mousePressed)
         {
             if (collidePoint(x, y, Input.mouseX, Input.mouseY))
-                hauling();
+                eating();
         }
 
         x = _tribeMember.x + _tribeMember.halfWidth + 5 + halfWidth;
@@ -36,9 +36,9 @@ class HaulingButton extends Entity
         graphic.y = -halfHeight;
     }
 
-    private function hauling()
+    private function eating()
     {
-        trace("Hauling...");
+        trace("Eating...");
         _tribeMember.linearMotion.active = false;
     }
 
