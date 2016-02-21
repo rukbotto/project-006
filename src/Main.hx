@@ -1,5 +1,6 @@
 import com.haxepunk.Engine;
 import com.haxepunk.HXP;
+import StartScene;
 
 class Main extends Engine
 {
@@ -9,7 +10,7 @@ class Main extends Engine
 #if debug
         HXP.console.enable();
 #end
-        HXP.scene = new MainScene();
+        HXP.scene = new StartScene();
     }
 
     public static function main() { new Main(); }
