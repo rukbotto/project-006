@@ -18,8 +18,8 @@ class WorldScene extends Scene
     {
         super();
         _worldResources = new Array<Array<Resource>>();
-        //0 = water, 1 = tree, 2 = plant, 3 = dirt, 6 = half plant
-        _resourceType = [0,1,2,3,6]; 
+        _resourceType = [Resource.WATER,Resource.TREE,Resource.PLANT,
+                         Resource.DIRT,Resource.HALF_PLANT]; 
     }
 
     public override function begin()

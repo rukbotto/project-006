@@ -43,14 +43,17 @@ class EatingButton extends Entity
         var resource = worldScene.getTileByPosition(Std.int(_tribeMember.x +
                        _tribeMember.halfWidth), Std.int(_tribeMember.y + 
                        _tribeMember.halfHeight));
-        if (resource.type == Resource.PLANT ||
-            resource.type == Resource.HALF_PLANT)
+        if (resource.type == Resource.PLANT)
         {
-            worldScene.tilemap.setTile(resource.x, resource.y, if (resource.type
-                                       == Resource.PLANT) Resource.HALF_PLANT 
-                                       else Resource.DIRT);
-            resource.type = if (resource.type == Resource.PLANT)
-                            Resource.HALF_PLANT else Resource.DIRT;
+            worldScene.tilemap.setTile(resource.x, resource.y, 
+                                       Resource.HALF_PLANT);
+            resource.type = Resource.HALF_PLANT;
+        }
+        else if (resource.type == Resource.HALF_PLANT)
+        {
+            worldScene.tilemap.setTile(resource.x, resource.y, 
+                                       Resource.DIRT);   
+            resource.type = Resource.DIRT;
         }
         _tribeMember.linearMotion.active = false;
     }
