@@ -52,6 +52,8 @@ class TribeMember extends Entity
 
     public override function update()
     {
+        scene.add(_eatingButton);
+
         if (Input.mousePressed)
         {
             if (_selected)
@@ -59,27 +61,14 @@ class TribeMember extends Entity
                 _linearMotion.setMotionSpeed(x, y, Input.mouseX, Input.mouseY,
                     _speed);
                 _selected = false;
-
-                scene.remove(_eatingButton);
-                _toggleMenu = false;
+                _eatingButton.visible = false;
             }
         }
 
         if (Input.pressed(Key.M))
         {
             if (_selected)
-            {
-                if (!_toggleMenu)
-                {
-                    scene.add(_eatingButton);
-                    _toggleMenu = true;
-                }
-                else
-                {
-                    scene.remove(_eatingButton);
-                    _toggleMenu = false;
-                }
-            }
+                _eatingButton.toggle();
         }
 
         x = _linearMotion.x;

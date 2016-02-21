@@ -14,11 +14,12 @@ class EatingButton extends Entity
 
         graphic = Image.createRect(EatingButton.WIDTH, EatingButton.HEIGHT,
             0xFF0000);
-
-        _tribeMember = tribeMember;
+        visible = false;
 
         setHitbox(EatingButton.WIDTH, EatingButton.HEIGHT);
         centerOrigin();
+
+        _tribeMember = tribeMember;
     }
 
     public override function update()
@@ -34,6 +35,14 @@ class EatingButton extends Entity
 
         graphic.x = -halfWidth;
         graphic.y = -halfHeight;
+    }
+
+    public function toggle()
+    {
+        if (!visible)
+            visible = true;
+        else
+            visible = false;
     }
 
     private function eating()
