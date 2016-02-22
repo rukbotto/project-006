@@ -28,9 +28,14 @@ class StartScene extends Scene
         _showTween.tween(1, 0xFFFFFF, 0xFFFFFF, 0, 1);
 
         var textOptions = {size: 24, align: TextFormatAlign.CENTER};
-        var text = new Text("Press SPACE BAR to continue.", 0, 0, 640, 0, textOptions);
-    
+        text = new Text("Press SPACE BAR to continue.", 0, 0, 640, 0,
+            textOptions);
         description = addGraphic(text, 0, 0, 250);
+
+        var textOptions = {size: 24, align: TextFormatAlign.CENTER};
+        text = new Text("Then select a tribe member and press M.", 0, 0, 640, 0,
+            textOptions);
+        addGraphic(text, 0, 0, 300);
     }
 
     public override function update()
